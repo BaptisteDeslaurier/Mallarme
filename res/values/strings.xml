@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Spectacle</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_danseuses">Danseuses</string>
+    <string name="action_mesures">Mesures</string>
+    <string name="action_escaliers">Escaliers</string>
+    <string name="action_geometries">Geometries</string>
+    <string name="title_activity_mesure">Mesure</string>
+    <string name="title_activity_geometrie">Geometrie</string>
+    <string name="title_activity_escalier">Escalier</string>
+
+</resources>
