@@ -66,15 +66,6 @@ public class EscalierActivity extends Activity {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
 				String txt = editText.getText().toString();
-				/*if(s.equals("")) { 
-					Log.i("null", "La value est null!");
-					editText.setText(String.valueOf("0"));
-					seekBar.setProgress(Integer.parseInt(s.toString()));
-				}else if(Integer.parseInt(s.toString())>= 0 && Integer.parseInt(s.toString())<=100)
-				{
-					seekBar.setProgress(Integer.parseInt(s.toString()));
-					Log.i("Value text", s.toString());
-				}*/
 				if ((txt != null) && (txt.trim().length() > 0)) {
 					seekBar.setProgress(Integer.parseInt(s.toString()));
 				}else{ 
@@ -100,7 +91,6 @@ public class EscalierActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

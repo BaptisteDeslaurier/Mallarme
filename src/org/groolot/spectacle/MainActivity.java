@@ -67,7 +67,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -125,13 +124,13 @@ public class MainActivity extends Activity implements OnTouchListener {
        
         float X = (float)v.getLeft() / (float)screen.getWidth() + (float)v.getWidth() / 2 / (float)screen.getWidth();
         float Y = (float)v.getTop() / (float)screen.getHeight() + (float)v.getHeight() / 2 / (float)screen.getHeight();
-        
+        /*
         Vector send = new Vector(2);
 		send.add(X);
 		send.add(Y);
 		OSCMessage msg = new OSCMessage("/mallarme/masque/"+v.getResources().getResourceEntryName(v.getId()), send);
 		OSCSend("172.16.100.176", 12345, msg);
-        
+        */
         return false;
     }
    
