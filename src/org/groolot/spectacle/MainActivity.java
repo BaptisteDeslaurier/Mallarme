@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,6 +64,16 @@ public class MainActivity extends Activity implements OnTouchListener {
             }
         });
         temp.start();
+    }
+    
+	@Override
+    public void onPause() {
+        super.onPause();
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();    
     }
 
     @Override
@@ -124,13 +135,13 @@ public class MainActivity extends Activity implements OnTouchListener {
        
         float X = (float)v.getLeft() / (float)screen.getWidth() + (float)v.getWidth() / 2 / (float)screen.getWidth();
         float Y = (float)v.getTop() / (float)screen.getHeight() + (float)v.getHeight() / 2 / (float)screen.getHeight();
-        /*
+        
         Vector send = new Vector(2);
 		send.add(X);
 		send.add(Y);
 		OSCMessage msg = new OSCMessage("/mallarme/masque/"+v.getResources().getResourceEntryName(v.getId()), send);
-		OSCSend("172.16.100.176", 12345, msg);
-        */
+		OSCSend("172.16.101.15", 2727, msg);
+        
         return false;
     }
    

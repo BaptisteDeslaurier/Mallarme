@@ -20,6 +20,7 @@ public class EscalierActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_escalier);
 		
 		ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton1);
@@ -66,11 +67,21 @@ public class EscalierActivity extends Activity {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
 				String txt = editText.getText().toString();
-				if ((txt != null) && (txt.trim().length() > 0)) {
+				
+				// Position du curseur à la fin de la chaine de caractères
+				editText.setSelection(txt.length());
+				
+				// Test pour voir si une CdC est présente sinon on met 0
+				if(!txt.equals("") && txt.trim().length() > 0){
 					seekBar.setProgress(Integer.parseInt(s.toString()));
-				}else{ 
+					// Si la CdC dépasse 100 on l'a remet à 100
+					if(Integer.parseInt(s.toString()) > 100){
+						editText.setText("100");
+						seekBar.setProgress(100);
+					}
+				}else{
 					editText.setText("0");
-					seekBar.setProgress(Integer.parseInt(s.toString()));
+					seekBar.setProgress(0);
 				}
 			}
 			
