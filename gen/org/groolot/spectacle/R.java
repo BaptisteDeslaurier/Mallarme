@@ -28,19 +28,24 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f070000;
-        public static final int action_danseuses=0x7f07000a;
-        public static final int action_escaliers=0x7f07000c;
-        public static final int action_geometries=0x7f07000d;
-        public static final int action_mesures=0x7f07000b;
+        public static final int action_danseuses=0x7f07000f;
+        public static final int action_escaliers=0x7f070011;
+        public static final int action_geometries=0x7f070012;
+        public static final int action_mesures=0x7f070010;
+        public static final int annabelle=0x7f07000d;
         public static final int editText1=0x7f070004;
-        public static final int imageButton1=0x7f070009;
-        public static final int imageButton2=0x7f070008;
-        public static final int imageView1=0x7f070005;
-        public static final int main_screen=0x7f070007;
+        public static final int editText2=0x7f070008;
+        public static final int florence=0x7f07000c;
+        public static final int imageButton2=0x7f07000e;
+        public static final int imageView1=0x7f070009;
+        public static final int main_screen=0x7f07000b;
         public static final int seekBar1=0x7f070003;
+        public static final int seekBar2=0x7f070007;
         public static final int textView1=0x7f070001;
-        public static final int textViewGeometrie=0x7f070006;
+        public static final int textView2=0x7f070005;
+        public static final int textViewGeometrie=0x7f07000a;
         public static final int toggleButton1=0x7f070002;
+        public static final int toggleButton2=0x7f070006;
     }
     public static final class layout {
         public static final int activity_escalier=0x7f030000;

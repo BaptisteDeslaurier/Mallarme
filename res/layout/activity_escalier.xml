@@ -51,5 +51,46 @@
         </LinearLayout>
 
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xenakis droite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ToggleButton
+                android:id="@+id/toggleButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+            <SeekBar
+                android:id="@+id/seekBar2"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.71"
+                android:focusable="false" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="79dp"
+                android:layout_height="wrap_content"
+                android:inputType="number" >
+
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

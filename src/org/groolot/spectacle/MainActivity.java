@@ -1,14 +1,11 @@
 package org.groolot.spectacle;
 
-
 import com.illposed.osc.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Vector;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +18,6 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 
 public class MainActivity extends Activity implements OnTouchListener {
    
@@ -37,10 +33,10 @@ public class MainActivity extends Activity implements OnTouchListener {
        
         screen = (RelativeLayout) findViewById(R.id.main_screen);
        
-        cercleA = (ImageButton) findViewById(R.id.imageButton1);
+        cercleA = (ImageButton) findViewById(R.id.annabelle);
         cercleA.setOnTouchListener(this);
        
-        cercleF = (ImageButton) findViewById(R.id.imageButton2);
+        cercleF = (ImageButton) findViewById(R.id.florence);
         cercleF.setOnTouchListener(this);
     }
 
@@ -139,8 +135,8 @@ public class MainActivity extends Activity implements OnTouchListener {
         Vector send = new Vector(2);
 		send.add(X);
 		send.add(Y);
-		OSCMessage msg = new OSCMessage("/mallarme/masque/"+v.getResources().getResourceEntryName(v.getId()), send);
-		OSCSend("172.16.101.15", 2727, msg);
+		OSCMessage msg = new OSCMessage("/mallarme/"+v.getResources().getResourceEntryName(v.getId())+"/position", send);
+		OSCSend("172.16.101.179", 2727, msg);
         
         return false;
     }
