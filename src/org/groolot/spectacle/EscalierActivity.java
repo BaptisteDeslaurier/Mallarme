@@ -8,10 +8,13 @@ import java.util.Vector;
 
 import com.illposed.osc.*;
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -21,9 +24,9 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class EscalierActivity extends Activity {
+public class EscalierActivity extends Activity implements OnClickListener {
 	
-    public void OSCSend(final String addr, final int port, final OSCMessage msg) {
+	public void OSCSend(final String addr, final int port, final OSCMessage msg) {
         Thread temp = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -51,7 +54,7 @@ public class EscalierActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_escalier);
 		
-		ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton1);
+		final ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton1);
 		final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar1);
 		final EditText editText = (EditText) findViewById(R.id.editText1);
 		ToggleButton toggle2 = (ToggleButton) findViewById(R.id.toggleButton2);
@@ -68,12 +71,12 @@ public class EscalierActivity extends Activity {
 		        if (isChecked) {
 		            seekBar.setEnabled(true);
 		            editText.setEnabled(true);
-		    		OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite T");
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite");
 		    		OSCSend("172.16.101.179", 2727, msg);
 		        } else {
 		        	seekBar.setEnabled(false);
 		        	editText.setEnabled(false);
-		        	OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite F");
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite");
 		    		OSCSend("172.16.101.179", 2727, msg);
 		        }
 		    }
@@ -84,9 +87,13 @@ public class EscalierActivity extends Activity {
 		        if (isChecked) {
 		            seekBar2.setEnabled(true);
 		            editText2.setEnabled(true);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton");
+		    		OSCSend("172.16.101.179", 2727, msg);
 		        } else {
 		        	seekBar2.setEnabled(false);
 		        	editText2.setEnabled(false);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton");
+		    		OSCSend("172.16.101.179", 2727, msg);
 		        }
 		    }
 		});
@@ -96,7 +103,9 @@ public class EscalierActivity extends Activity {
 			@Override 
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) { 
 				// TODO Auto-generated method stub 
-				editText.setText(String.valueOf(progress)); 
+				editText.setText(String.valueOf(progress));
+	            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite "+String.valueOf(progress)+" 1");
+	    		OSCSend("172.16.101.179", 2727, msg);
 			}
 
 			@Override
@@ -209,6 +218,8 @@ public class EscalierActivity extends Activity {
 			}
 		});
 	}
+	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -241,5 +252,11 @@ public class EscalierActivity extends Activity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		
 	}
 }

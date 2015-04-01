@@ -61,16 +61,6 @@ public class MainActivity extends Activity implements OnTouchListener {
         });
         temp.start();
     }
-    
-	@Override
-    public void onPause() {
-        super.onPause();
-    }
-    
-    @Override
-    public void onResume() {
-        super.onResume();    
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
