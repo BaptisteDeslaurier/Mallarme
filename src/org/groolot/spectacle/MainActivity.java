@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		send.add(X);
 		send.add(Y);
 		OSCMessage msg = new OSCMessage("/mallarme/"+v.getResources().getResourceEntryName(v.getId())+"/position", send);
-		OSCSend("172.16.101.179", 2727, msg);
+		OSCSend("172.16.101.39", 2727, msg);
         
         return false;
     }

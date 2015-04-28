@@ -17,6 +17,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -24,29 +27,9 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class EscalierActivity extends Activity implements OnClickListener {
+public class EscalierActivity extends Activity implements OnClickListener, OnTouchListener {
 	
-	public void OSCSend(final String addr, final int port, final OSCMessage msg) {
-        Thread temp = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                OSCPortOut sender = new OSCPortOut(InetAddress.getByName(addr), port);
-                sender.send(msg);
-            } catch (SocketException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (UnknownHostException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            }
-        });
-        temp.start();
-    }
+	Vector send = new Vector(1);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,27 +40,43 @@ public class EscalierActivity extends Activity implements OnClickListener {
 		final ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton1);
 		final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar1);
 		final EditText editText = (EditText) findViewById(R.id.editText1);
-		ToggleButton toggle2 = (ToggleButton) findViewById(R.id.toggleButton2);
+		final ToggleButton toggle2 = (ToggleButton) findViewById(R.id.toggleButton2);
 		final SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
 		final EditText editText2 = (EditText) findViewById(R.id.editText2);
-		
+		final ToggleButton toggle3 = (ToggleButton) findViewById(R.id.toggleButton3);
+		final SeekBar seekBar3 = (SeekBar) findViewById(R.id.seekBar3);
+		final EditText editText3 = (EditText) findViewById(R.id.editText3);
+		final ToggleButton toggle4 = (ToggleButton) findViewById(R.id.toggleButton4);
+		final SeekBar seekBar4 = (SeekBar) findViewById(R.id.seekBar4);
+		final EditText editText4 = (EditText) findViewById(R.id.editText4);
+
+		toggle.setOnTouchListener(this);
+        
 		editText.setEnabled(false);
 		seekBar.setEnabled(false);
 		editText2.setEnabled(false);
 		seekBar2.setEnabled(false);
+		editText3.setEnabled(false);
+		seekBar3.setEnabled(false);
+		editText4.setEnabled(false);
+		seekBar4.setEnabled(false);
 		
 		toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		        if (isChecked) {
 		            seekBar.setEnabled(true);
 		            editText.setEnabled(true);
-		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite");
-		    		OSCSend("172.16.101.179", 2727, msg);
+		    		send.add(1);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
 		        } else {
 		        	seekBar.setEnabled(false);
 		        	editText.setEnabled(false);
-		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite");
-		    		OSCSend("172.16.101.179", 2727, msg);
+		    		send.add(0);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
 		        }
 		    }
 		});
@@ -87,13 +86,57 @@ public class EscalierActivity extends Activity implements OnClickListener {
 		        if (isChecked) {
 		            seekBar2.setEnabled(true);
 		            editText2.setEnabled(true);
-		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton");
-		    		OSCSend("172.16.101.179", 2727, msg);
+		    		send.add(1);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
 		        } else {
 		        	seekBar2.setEnabled(false);
 		        	editText2.setEnabled(false);
-		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton");
-		    		OSCSend("172.16.101.179", 2727, msg);
+		    		send.add(0);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
+		        }
+		    }
+		});
+		
+		toggle3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		        if (isChecked) {
+		            seekBar3.setEnabled(true);
+		            editText3.setEnabled(true);
+		    		send.add(1);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/data", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
+		        } else {
+		        	seekBar3.setEnabled(false);
+		        	editText3.setEnabled(false);
+		    		send.add(0);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/data", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
+		        }
+		    }
+		});
+		
+		toggle4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		        if (isChecked) {
+		            seekBar4.setEnabled(true);
+		            editText4.setEnabled(true);
+		    		send.add(1);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/cercle", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
+		        } else {
+		        	seekBar4.setEnabled(false);
+		        	editText4.setEnabled(false);
+		    		send.add(0);
+		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/cercle", send);
+		    		OSCSend("172.16.101.39", 2727, msg);
+		    		send.clear();
 		        }
 		    }
 		});
@@ -104,8 +147,8 @@ public class EscalierActivity extends Activity implements OnClickListener {
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) { 
 				// TODO Auto-generated method stub 
 				editText.setText(String.valueOf(progress));
-	            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite "+String.valueOf(progress)+" 1");
-	    		OSCSend("172.16.101.179", 2727, msg);
+	            /*OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite "+String.valueOf(progress)+" 1");
+	    		OSCSend("172.16.101.39", 2727, msg);*/
 			}
 
 			@Override
@@ -219,7 +262,27 @@ public class EscalierActivity extends Activity implements OnClickListener {
 		});
 	}
 	
-
+	public void OSCSend(final String addr, final int port, final OSCMessage msg) {
+        Thread temp = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                OSCPortOut sender = new OSCPortOut(InetAddress.getByName(addr), port);
+                sender.send(msg);
+            } catch (SocketException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (UnknownHostException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            }
+        });
+        temp.start();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -258,5 +321,11 @@ public class EscalierActivity extends Activity implements OnClickListener {
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
