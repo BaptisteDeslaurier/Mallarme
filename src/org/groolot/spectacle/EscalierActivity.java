@@ -27,7 +27,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class EscalierActivity extends Activity implements OnClickListener, OnTouchListener {
+public class EscalierActivity extends Activity implements OnTouchListener {
 	
 	Vector send = new Vector(1);
 	
@@ -68,14 +68,14 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 		            editText.setEnabled(true);
 		    		send.add(1);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        } else {
 		        	seekBar.setEnabled(false);
 		        	editText.setEnabled(false);
 		    		send.add(0);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        }
 		    }
@@ -88,14 +88,14 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 		            editText2.setEnabled(true);
 		    		send.add(1);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        } else {
 		        	seekBar2.setEnabled(false);
 		        	editText2.setEnabled(false);
 		    		send.add(0);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/baton", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        }
 		    }
@@ -108,14 +108,14 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 		            editText3.setEnabled(true);
 		    		send.add(1);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/data", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        } else {
 		        	seekBar3.setEnabled(false);
 		        	editText3.setEnabled(false);
 		    		send.add(0);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/data", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        }
 		    }
@@ -128,14 +128,14 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 		            editText4.setEnabled(true);
 		    		send.add(1);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/cercle", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        } else {
 		        	seekBar4.setEnabled(false);
 		        	editText4.setEnabled(false);
 		    		send.add(0);
 		            OSCMessage msg = new OSCMessage("/mallarme/xenakis/cercle", send);
-		    		OSCSend("172.16.101.39", 2727, msg);
+		    		OSCSend("172.16.101.65", 2727, msg);
 		    		send.clear();
 		        }
 		    }
@@ -147,8 +147,10 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) { 
 				// TODO Auto-generated method stub 
 				editText.setText(String.valueOf(progress));
-	            /*OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite "+String.valueOf(progress)+" 1");
-	    		OSCSend("172.16.101.39", 2727, msg);*/
+				send.add(progress);
+				OSCMessage msg = new OSCMessage("/mallarme/xenakis/droite", send);
+	    		OSCSend("172.16.101.65", 2727, msg);
+	    		send.clear();
 			}
 
 			@Override
@@ -315,12 +317,6 @@ public class EscalierActivity extends Activity implements OnClickListener, OnTou
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

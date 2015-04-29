@@ -104,30 +104,35 @@ public class MainActivity extends Activity implements OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         // TODO Auto-generated method stub
+    	float X = (float)v.getLeft() / (float)screen.getWidth() + (float)v.getWidth() / 2 / (float)screen.getWidth();
+        float Y = (float)v.getTop() / (float)screen.getHeight() + (float)v.getHeight() / 2 / (float)screen.getHeight();
+    	
         if(event.getAction() == MotionEvent.ACTION_UP) {
             if((v.getTop()+v.getHeight()) > screen.getHeight()){
-                v.offsetTopAndBottom(- v.getHeight());
-            }else if(v.getTop()-v.getHeight() < 0){
-                v.offsetTopAndBottom(+ v.getHeight());
+                v.offsetTopAndBottom(- v.getHeight()/2);
+            }else if(v.getBottom()-v.getHeight() < 0){
+                v.offsetTopAndBottom(+ v.getHeight()/2);
             }else if(v.getRight() + v.getWidth() > screen.getWidth()){
-                v.offsetLeftAndRight(- v.getHeight());
-            }else if(v.getRight() - v.getWidth() < 0){
-                v.offsetLeftAndRight(+ v.getHeight());
+                v.offsetLeftAndRight(- v.getHeight()/2);
+            }else if(v.getLeft() - v.getWidth() < 0){
+                v.offsetLeftAndRight(+ v.getHeight()/4);
             }
+        	/*
+        	if(X < 0 || X > 1 || Y < 0 || Y > 1){ 
+        	
+        	}
+        	 */
         }else{
             v.offsetTopAndBottom(limitScreen(v.getHeight(), event.getY()));
         }
         v.offsetLeftAndRight(limitScreen(v.getWidth(), event.getX()));
        
-        float X = (float)v.getLeft() / (float)screen.getWidth() + (float)v.getWidth() / 2 / (float)screen.getWidth();
-        float Y = (float)v.getTop() / (float)screen.getHeight() + (float)v.getHeight() / 2 / (float)screen.getHeight();
-        
         Vector send = new Vector(2);
-		send.add(X);
-		send.add(Y);
-		OSCMessage msg = new OSCMessage("/mallarme/"+v.getResources().getResourceEntryName(v.getId())+"/position", send);
-		OSCSend("172.16.101.39", 2727, msg);
-        
+        send.add(X);
+        send.add(Y);
+        OSCMessage msg = new OSCMessage("/mallarme/"+v.getResources().getResourceEntryName(v.getId())+"/position", send);
+        OSCSend("172.16.101.65", 2727, msg);
+			
         return false;
     }
    
